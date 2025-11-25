@@ -3,10 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimGym</title>
+    <title>TimGym Meme</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00);
+            background-size: 600% 600%;
+            animation: bgMove 3s infinite alternate;
+            text-align: center;
+            font-family: Comic Sans MS, sans-serif;
+            overflow: hidden;
+        }
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        img {
+            display: block;
+            margin: 40px auto;
+            width: 300px;
+            animation: shake 0.3s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(0,0) rotate(0); }
+            25% { transform: translate(5px,-5px) rotate(5deg); }
+            50% { transform: translate(-5px,5px) rotate(-5deg); }
+            100% { transform: translate(0,0) rotate(0); }
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            background: #ff0066;
+            color: white;
+            box-shadow: 0 0 20px #000;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .popup {
+            position: absolute;
+            background: white;
+            padding: 5px; /* kleiner */
+            border: 2px solid black;
+            font-size: 14px; /* kleiner */
+            width: auto;
+            height: auto;
+            animation: bounceX 3s infinite alternate ease-in-out,
+                       bounceY 2.5s infinite alternate ease-in-out;
+        }
+        @keyframes bounceX {
+            0% { left: 0vw; }
+            100% { left: 95vw; }
+        }
+            100% { left: 100vw; }
+        }
+        @keyframes bounceY {
+            0% { top: 0vh; }
+            100% { top: 90vh; }
+        }
+            100% { top: 100vh; }
+        }
+            to { transform: translate(80vw, 80vh); }
+        }
+    </style>
 </head>
 <body>
     <h1>Hitte das Gym wie Tim:</h1>
     <img src="tim_gym.png" alt="Tim Gym">
+
+    <button onclick="activateChaos()">Spaß Button 😂</button>
+
+    <script>
+        function activateChaos() {
+            // Mehr Popups
+            for (let i = 0; i < 40; i++) {
+                spawnPopup("TIM GYM ÜBERALL!!!");
+            }
+
+            // Bildschirm rotieren
+            setInterval(() => {
+                document.body.style.transform = `rotate(${Math.random()*20-10}deg)`;
+            }, 100);
+
+            // Cursor Regenbogen
+            document.body.style.cursor = "url('https://cur.cursors-4u.net/cursors/cur-11/cur1021.ani'), auto";
+
+            // Autoplay Musik
+            const audio = new Audio('https://www.myinstants.com/media/sounds/airhorn.mp3');
+            audio.loop = true;
+            audio.play();
+
+            // Mehr Tabs öffnen
+            for (let i = 0; i < 10; i++) {
+                window.open("https://pointerpointer.com/", "_blank");
+            }
+
+            // Popup-Sound Effekte
+            setInterval(() => {
+                const sfx = new Audio('https://www.myinstants.com/media/sounds/vine-boom.mp3');
+                sfx.play();
+            }, 2000);
+        }
+
+        function spawnPopup(text) {
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.innerText = text;
+            popup.style.top = Math.floor(Math.random() * (window.innerHeight - 150)) + 'px';
+            popup.style.left = Math.floor(Math.random() * (window.innerWidth - 200)) + 'px';
+            popup.style.transform = `rotate(${Math.random()*360}deg)`;
+            popup.style.background = `hsl(${Math.random()*360},100%,50%)`;
+            popup.style.color = 'black';
+            popup.style.fontSize = '14px';
+            document.body.appendChild(popup);
+        }
+    // Konfetti & Herzen Partikel
+function spawnParticles() {
+    for (let i = 0; i < 50; i++) {
+        const p = document.createElement('div');
+        p.innerText = Math.random() > 0.5 ? '💖' : '🎉';
+        p.style.position = 'fixed';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.top = '-10vh';
+        p.style.fontSize = (20 + Math.random()*40) + 'px';
+        p.style.animation = `fall ${3 + Math.random()*3}s linear`; 
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 7000);
+    }
+}
+
+// Fall-Animation
+const style = document.createElement('style');
+style.innerHTML = `@keyframes fall { from { transform: translateY(0); } to { transform: translateY(120vh) rotate(360deg); } }`;
+document.head.appendChild(style);
+
+// Chaos erweitern
+const originalActivate = activateChaos;
+activateChaos = function() {
+    originalActivate();
+    setInterval(spawnParticles, 500);
+    setInterval(() => spawnPopup("💥💖🎉 TIM GYM CHAOS 🎉💖💥"), 300);
+};
+
+</script>
 </body>
 </html>
